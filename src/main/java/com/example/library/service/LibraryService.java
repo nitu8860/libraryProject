@@ -30,6 +30,14 @@ public class LibraryService {
         }
         return null;
     }
+    public Library findByName(String name) {
+        for (Library library : libraries) {
+            if (library.getLibraryName().equals(name)) {
+                return library;
+            }
+        }
+        return null;
+    }
 
     public Library addLibrary(Library library) {
         if (library.getId() == 0) {
@@ -54,9 +62,26 @@ public class LibraryService {
         libraries.set(index, library);
         return library;
     }
+    public Library updateLibraryByName(String name, Library library) {
+        Library existingLibrary = findByName(name);
+        if (existingLibrary == null) {
+            return null;
+        }
+        int index = libraries.indexOf(existingLibrary);
+        library.setId(existingLibrary.getId());
+        libraries.set(index, library);
+        return library;
+    }
+
 
     public void deleteLibrary(int id) {
         Library library = findById(id);
+        if (library != null) {
+            libraries.remove(library);
+        }
+    }
+    public void deleteLibraryByName(String name) {
+        Library library = findByName(name);
         if (library != null) {
             libraries.remove(library);
         }

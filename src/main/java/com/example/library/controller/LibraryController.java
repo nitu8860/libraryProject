@@ -24,6 +24,10 @@ public class LibraryController {
     public Library findById(@PathVariable int id) {
         return libraryService.findById(id);
     }
+    @GetMapping("/find-library/name/{name}")
+    public Library findByName(@PathVariable String name) {
+        return libraryService.findByName(name);
+    }
 
     @GetMapping("/find-all")
     public List<Library> findAllLibraries() {
@@ -34,9 +38,18 @@ public class LibraryController {
     public void updateLibrary(@PathVariable int id, @RequestBody Library library) {
         libraryService.updateLibrary(id, library);
     }
+    @PutMapping("/update-library/name/{name}")
+    public void updateLibraryByName(@PathVariable String name, @RequestBody Library library) {
+        libraryService.updateLibraryByName(name, library);
+    }
 
     @DeleteMapping("/delete-library/id/{id}")
     public void deleteLibrary(@PathVariable int id) {
         libraryService.deleteLibrary(id);
     }
+    @DeleteMapping("/delete-library/name/{name}")
+    public void deleteLibraryByName(@PathVariable String name) {
+        libraryService.deleteLibraryByName(name);
+    }
+
 }
